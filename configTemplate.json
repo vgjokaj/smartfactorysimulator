@@ -1,0 +1,276 @@
+{
+    "mqttServerURI": "tcp://mosquitto:1883",
+    "mqttUsername": "username",
+    "mqttPassword": "password",
+    "rootTopic": "smartfactory",
+    "machines": {
+        "PatternMaking": {
+            "id": "PatternMaking",
+            "data": [
+                {
+                    "id": "PatternMaking Normal DST",
+                    "type": "FIXED_CURVE",
+                    "value": "shakeGestureWiimote.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "500, 5"
+                    }
+                },
+                {
+                    "id": "PatternMaking Cauchy DST",
+                    "type": "FIXED_CURVE",
+                    "value": "shakeGestureWiimote.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "500, 5"
+                    }
+                }
+            ],
+            "dataFrequency": 1000,
+            "amountOfDataPerFrequency": 10,
+            "totalDurationPerCycle": 5000
+        },
+        "EdgeSeaming": {
+            "id": "EdgeSeaming",
+            "data": [
+                {
+                    "id": "EdgeSeaming-Dataset-1",
+                    "type": "FIXED_CURVE",
+                    "value": "gunPoint.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "30, 5"
+                    }
+                },
+                {
+                    "id": "EdgeSeaming-Dataset-2",
+                    "type": "FIXED_CURVE",
+                    "value": "gunPoint.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "30, 3"
+                    }
+                }
+            ],
+            "dataFrequency": 2000,
+            "amountOfDataPerFrequency": 20,
+            "totalDurationPerCycle": 6000
+        },
+        "Pressing": {
+            "id": "Pressing",
+            "data": [
+                {
+                    "id": "Pressing-Dataset 2",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json"
+                },
+                {
+                    "id": "Pressing-Dataset 2 with Normal Distribution",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "300, 20"
+                    },
+                    "qualityConstraint": {
+                        "type": "RANGE",
+                        "value1": 260,
+                        "value2": 380
+                    }
+                },
+                {
+                    "id": "Pressing-Dataset 2 with Cauchy Distribution",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "350, 10"
+                    },
+                    "qualityConstraint": {
+                        "type": "RANGE",
+                        "value1": 260,
+                        "value2": 380
+                    }
+                }
+            ],
+            "dataFrequency": 2000,
+            "amountOfDataPerFrequency": 20,
+            "totalDurationPerCycle": 6000
+        }
+    },
+    "machineGroups": {
+        "cuttingGroup": {
+            "id": "cuttingGroup",
+            "machines": [
+                {
+                    "id": "Cutting-M3",
+                    "data": [
+                        {
+                            "id": "Cutting-M3 Normal DST",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "30, 30"
+                            },
+                            "qualityConstraint": {
+                                "type": "MIN",
+                                "value1": 900
+                            }
+                        }
+                    ],
+                    "dataFrequency": 2000,
+                    "amountOfDataPerFrequency": 20,
+                    "totalDurationPerCycle": 6000
+                },
+                {
+                    "id": "Cutting-M4",
+                    "data": [
+                        {
+                            "id": "Cutting-M4 Normal DST",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "0, 50"
+                            },
+                            "qualityConstraint": {
+                                "type": "MAX",
+                                "value1": 1450
+                            }
+                        }
+                    ],
+                    "dataFrequency": 2000,
+                    "amountOfDataPerFrequency": 20,
+                    "totalDurationPerCycle": 6000
+                },
+                {
+                    "id": "Cutting-M5",
+                    "data": [
+                        {
+                            "id": "Cutting-M5 Cauchy DST",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 10"
+                            },
+                            "qualityConstraint": {
+                                "type": "RANGE",
+                                "value1": 900,
+                                "value2": 1450
+                            }
+                        }
+                    ],
+                    "dataFrequency": 2000,
+                    "amountOfDataPerFrequency": 20,
+                    "totalDurationPerCycle": 6000
+                }
+            ]
+        },
+        "sewingGroup": {
+            "id": "sewingGroup",
+            "machines": [
+                {
+                    "id": "sewing-m5",
+                    "data": [
+                        {
+                            "id": "Sewing-m6-dataset Normal DST",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "700, 10"
+                            }
+                        }
+                    ],
+                    "dataFrequency": 1000,
+                    "amountOfDataPerFrequency": 20,
+                    "totalDurationPerCycle": 3000
+                },
+                {
+                    "id": "sewing-m6",
+                    "data": [
+                        {
+                            "id": "Sewing-m6-dataset Uniform DST",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json",
+                            "noise": {
+                                "type": "RND_INT",
+                                "value": "700, 750"
+                            }
+                        }
+                    ],
+                    "dataFrequency": 1000,
+                    "amountOfDataPerFrequency": 20,
+                    "totalDurationPerCycle": 5000
+                },
+                {
+                    "id": "sewing-m7",
+                    "data": [
+                        {
+                            "id": "Sewing-m7-dataset Cauchy DST",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json",
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "700, 1.5"
+                            }
+                        }
+                    ],
+                    "dataFrequency": 1000,
+                    "amountOfDataPerFrequency": 10,
+                    "totalDurationPerCycle": 3000
+                }
+            ]
+        }
+    },
+    "qualityGate": {
+        "id": "QG",
+        "machineIds": ["PatternMaking", "EdgeSeaming", "Pressing", "cuttingGroup", "sewingGroup"]
+    },
+    "eventSources": [
+        {
+            "eventSourceId": "MES"
+        },
+        {
+            "eventSourceId": "eventSource1",
+            "events": [
+                {
+                    "machineId": "PatternMaking",
+                    "eventsToGenerate": [
+                        {
+                            "id": "Maintenance Event 1",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "eventSourceId": "eventSource2",
+            "events": [
+                {
+                    "machineId": "EdgeSeaming",
+                    "eventsToGenerate": [
+                        {
+                            "id": "Machine 1 Broken Event",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 2,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 10"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "productionLine": [
+        "PatternMaking", "EdgeSeaming", "Pressing", "cuttingGroup", "sewingGroup"
+    ]
+}

@@ -1,0 +1,539 @@
+{
+    "mqttServerURI": "tcp://mosquitto:1883",
+    "mqttUsername": "username",
+    "mqttPassword": "password",
+    "rootTopic": "smartfactory",
+    "machines": {
+        "PatternMaking": {
+            "id": "PatternMaking",
+            "data": [
+                {
+                    "id": "pm-s1-normal-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "shakeGestureWiimote.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "500, 5"
+                    }
+                },
+                {
+                    "id": "pm-s1-cauchy-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "shakeGestureWiimote.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "500, 5"
+                    }
+                }
+            ],
+            "dataFrequency": 500,
+            "amountOfDataPerFrequency": 50,
+            "totalDurationPerCycle": 500
+        },
+        "EdgeSeaming": {
+            "id": "EdgeSeaming",
+            "data": [
+                {
+                    "id": "es-s1-normal-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "gunPoint.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "30, 5"
+                    }
+                },
+                {
+                    "id": "es-s1-cauchy-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "gunPoint.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "30, 3"
+                    }
+                }
+            ],
+            "dataFrequency": 500,
+            "amountOfDataPerFrequency": 60,
+            "totalDurationPerCycle": 500
+        },
+        "Pressing": {
+            "id": "Pressing",
+            "data": [
+                {
+                    "id": "p-s1",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json"
+                },
+                {
+                    "id": "p-s1-normal-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json",
+                    "noise": {
+                        "type": "NORMAL_DST",
+                        "value": "300, 20"
+                    },
+                    "qualityConstraint": {
+                        "type": "RANGE",
+                        "value1": 260,
+                        "value2": 380
+                    }
+                },
+                {
+                    "id": "p-s1-cauchy-dst",
+                    "type": "FIXED_CURVE",
+                    "value": "curve1.json",
+                    "noise": {
+                        "type": "CAUCHY_DST",
+                        "value": "350, 10"
+                    },
+                    "qualityConstraint": {
+                        "type": "RANGE",
+                        "value1": 260,
+                        "value2": 380
+                    }
+                }
+            ],
+            "dataFrequency": 500,
+            "amountOfDataPerFrequency": 60,
+            "totalDurationPerCycle": 500
+        }
+    },
+    "machineGroups": {
+        "cuttingGroup": {
+            "id": "cuttingGroup",
+            "machines": [
+                {
+                    "id": "Cutting-M1",
+                    "data": [
+                        {
+                            "id": "c-s1-normal-dst",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "30, 30"
+                            },
+                            "qualityConstraint": {
+                                "type": "MIN",
+                                "value1": 900
+                            }
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 60,
+                    "totalDurationPerCycle": 500
+                },
+                {
+                    "id": "Cutting-M2",
+                    "data": [
+                        {
+                            "id": "c-s1-normal-dst",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "0, 50"
+                            },
+                            "qualityConstraint": {
+                                "type": "MAX",
+                                "value1": 1450
+                            }
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 60,
+                    "totalDurationPerCycle": 500
+                },
+                {
+                    "id": "Cutting-M3",
+                    "data": [
+                        {
+                            "id": "d-s1-cauchy-dst",
+                            "type": "FIXED_CURVE",
+                            "value": "gunPoint.json",
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 10"
+                            },
+                            "qualityConstraint": {
+                                "type": "RANGE",
+                                "value1": 900,
+                                "value2": 1450
+                            }
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 60,
+                    "totalDurationPerCycle": 500
+                }
+            ]
+        },
+        "sewingGroup": {
+            "id": "sewingGroup",
+            "machines": [
+                {
+                    "id": "Sewing-m1",
+                    "data": [
+                        {
+                            "id": "s-s1-normal-dst",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json",
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "700, 20"
+                            },
+                            "qualityConstraint": {
+                                "type": "RANGE",
+                                "value1": 650,
+                                "value2": 720
+                            }
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 60,
+                    "totalDurationPerCycle": 500
+                },
+                {
+                    "id": "Sewing-m2",
+                    "data": [
+                        {
+                            "id": "s-s1-rnd-int",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json"
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 100,
+                    "totalDurationPerCycle": 500
+                },
+                {
+                    "id": "Sewing-m3",
+                    "data": [
+                        {
+                            "id": "s-s1-cauchy-dst",
+                            "type": "FIXED_CURVE",
+                            "value": "italyPowerDemand.json",
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "700, 3.5"
+                            },
+                            "qualityConstraint": {
+                                "type": "MAX",
+                                "value1": 710
+                            }
+                        }
+                    ],
+                    "dataFrequency": 500,
+                    "amountOfDataPerFrequency": 30,
+                    "totalDurationPerCycle": 500
+                }
+            ]
+        }
+    },
+    "qualityGate": {
+        "id": "QG",
+        "machineIds": ["PatternMaking", "EdgeSeaming", "Pressing", "cuttingGroup", "sewingGroup"]
+    },
+    "returnedItems": {
+        "id": "returnedItems",
+        "constraints": [
+            {
+                "machineId": "PatternMaking",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "EdgeSeaming",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Pressing",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Cutting-M1",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Cutting-M2",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Cutting-M3",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Sewing-m1",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Sewing-m2",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            },
+            {
+                "machineId": "Sewing-m3",
+                "qualityThresholdMinValue": 70,
+                "qualityThresholdMaxValue": 85
+            }
+        ]
+    },
+    "eventSources": [
+        {
+            "eventSourceId": "MES"
+        },
+        {
+            "eventSourceId": "eventSource1",
+            "events": [
+                {
+                    "machineId": "PatternMaking",
+                    "eventsToGenerate": [
+                        {
+                            "id": "pm-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 20
+                        }
+                    ]
+                },
+                {
+                    "machineId": "EdgeSeaming",
+                    "eventsToGenerate": [
+                        {
+                            "id": "es-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 18
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Pressing",
+                    "eventsToGenerate": [
+                        {
+                            "id": "p-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 25
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M1",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut1-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 25
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M2",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut2-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 25
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M3",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut3-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 25
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m1",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew1-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 30
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m2",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew2-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 15
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m3",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew3-maintenance",
+                            "type": "EVENT_MAINTENANCE",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 15
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "eventSourceId": "eventSource2",
+            "events": [
+                {
+                    "machineId": "PatternMaking",
+                    "eventsToGenerate": [
+                        {
+                            "id": "pm-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 45,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "EdgeSeaming",
+                    "eventsToGenerate": [
+                        {
+                            "id": "es-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 30,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Pressing",
+                    "eventsToGenerate": [
+                        {
+                            "id": "p-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 40,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M1",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut1-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 35,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M2",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut2-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 30,
+                            "noise": {
+                                "type": "NORMAL_DST",
+                                "value": "0, 6"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Cutting-M3",
+                    "eventsToGenerate": [
+                        {
+                            "id": "cut3-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 40,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m1",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew1-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 40,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m2",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew2-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 30,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "machineId": "Sewing-m3",
+                    "eventsToGenerate": [
+                        {
+                            "id": "sew3-broken",
+                            "type": "EVENT_BROKEN",
+                            "conditionType": "AFTER_ITEMS",
+                            "conditionValue": 30,
+                            "noise": {
+                                "type": "CAUCHY_DST",
+                                "value": "0, 1"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "productionLine": [
+        "PatternMaking", "EdgeSeaming", "Pressing", "cuttingGroup", "sewingGroup"
+    ]
+}
